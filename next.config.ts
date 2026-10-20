@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 const config: NextConfig = {
-  output: 'standalone',
+  output: 'export',
   poweredByHeader: false,
   images: { remotePatterns: [{ protocol: 'https', hostname: 'images.unsplash.com' }], qualities: [75, 85] },
   async headers() {
