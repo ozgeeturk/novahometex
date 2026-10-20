@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: novahometex
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-development-only}
+      POSTGRES_DB: novahometex
+    ports:
+      - "127.0.0.1:54329:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U novahometex -d novahometex"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  # Start the app on the host with pnpm dev; this optional service exercises the production container.
+  app:
+    profiles: [container]
+    build: .
+    ports:
+      - "127.0.0.1:3000:8080"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://novahometex:${POSTGRES_PASSWORD:-local-development-only}@db:5432/novahometex
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  postgres_data:

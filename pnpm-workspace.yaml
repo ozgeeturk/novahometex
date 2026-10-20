@@ -1,0 +1,21 @@
+packages:
+  - .
+overrides:
+  lodash: ^4.18.1
+  deepmerge-ts: ^8.0.0
+  mysql2: ^3.23.1
+  '@grpc/grpc-js': ^1.13.6
+allowBuilds:
+  '@prisma/engines': true
+  prisma: true
+  sharp: true
+  esbuild: true
+  embedded-postgres: true
+  '@embedded-postgres/windows-x64': true
+  '@embedded-postgres/linux-x64': true
+  '@embedded-postgres/darwin-x64': true
+  '@embedded-postgres/darwin-arm64': true
+  '@firebase/util': true
+  protobufjs: true
+  unrs-resolver: true
+  workerd: false
